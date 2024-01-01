@@ -1,31 +1,34 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
 const UserSchema = new Schema({
-    Name: {
+    name: {
         type: String,
+        required:true,
     },
-    Username: {
+    username: {
         type: String,
         unique: true,
-        required: [true,"Username Required!"],
+        required: [true, 'Username is required!'],
     },
-    MobileNumber: {
+    mobileNumber: {
         type: String,
-        required: [true,"Username Required!"],
+        required: [true, 'Mobile number is required!'],
     },
     password: {
         type: String,
         required: true,
         validate: {
             validator: function (value) {
+                // Password should have at least one uppercase letter, one special character, and be at least 8 characters long
                 return /^(?=.[A-Z])(?=.[!@#$%^&])(?=.[a-z]).{8,}$/.test(value);
             },
             message: props => `${props.value} is not a valid password!,`
         },
+    },
     confirmPassword: {
         type: String,
         required: true,
     },
-})
+});
 
-export const User = mongoose.models.users || mongoose.model("users", UserSchema);
+export const User = mongoose.models.Users || mongoose.model('Users', UserSchema);
