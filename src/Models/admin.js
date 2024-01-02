@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+
+
 const AdminSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -30,6 +32,4 @@ const AdminSchema = new mongoose.Schema({
     },
 });
 
-const AdminModel = mongoose.model('Admin', AdminSchema);
-
-export default AdminModel;
+export const Admin = mongoose.models.admin || mongoose.model("admin",AdminSchema);
